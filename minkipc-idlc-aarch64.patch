@@ -1,0 +1,12 @@
+diff -ruN minkipc-1.2.9.orig/CMakeLists.txt minkipc-1.2.9.new/CMakeLists.txt
+--- minkipc-1.2.9.orig/CMakeLists.txt	2026-09-09 17:08:36.563836101 +0530
++++ minkipc-1.2.9.new/CMakeLists.txt	2026-09-09 17:08:36.611835463 +0530
+@@ -37,7 +37,7 @@
+
+ if ("${MINKIDLC_BIN_DIR}" STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}/idlc")
+ 	file(DOWNLOAD
+-	https://github.com/quic/mink-idl-compiler/releases/download/v0.2.0/idlc
++	https://github.com/quic/mink-idl-compiler/releases/download/v0.2.4/minkidl-aarch64-unknown-linux-musl
+ 	${MINKIDLC_BIN_DIR}/idlc
+ 	)
+ 	file(CHMOD ${MINKIDLC_BIN_DIR}/idlc PERMISSIONS OWNER_EXECUTE OWNER_WRITE OWNER_READ)
