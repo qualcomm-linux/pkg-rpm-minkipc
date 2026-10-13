@@ -10,8 +10,8 @@ Patch0:		minkipc-idlc-aarch64.patch
 
 BuildRequires:	gcc
 BuildRequires:	make
-BuildRequires:	qcbor-devel
-BuildRequires:	quic-teec-devel
+BuildRequires:	pkgconfig(qcbor)
+BuildRequires:	pkgconfig(qcomtee)
 BuildRequires:	systemd-rpm-macros
 
 %description
