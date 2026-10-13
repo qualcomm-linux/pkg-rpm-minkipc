@@ -76,8 +76,8 @@ for GlobalPlatform TEE API conformance testing.
 
 %build
 %cmake \
-  -DSYSTEMD_UNIT_DIR=/usr/lib/systemd/system \
-  -DUDEV_DIR=/usr/lib/udev/rules.d \
+  -DSYSTEMD_UNIT_DIR=%{_unitdir} \
+  -DUDEV_DIR=%{_udevrulesdir} \
   -DBUILD_UNITTEST=TRUE \
   -DDISTRO_USER=securemsm \
   -DDISTRO_GROUP=securemsm \
