@@ -21,16 +21,9 @@ user space to Trusted Execution Environment—using unforgeable object reference
 mechanisms such as SMC, sockets, or TEE IOCTLs.
 
 
-%package libs
-Summary: Shared library for Qualcomm MinkIPC
-
-%description libs
-This package consists of the shared library libminkadaptor and libminkteec.
-
-
 %package devel
 Summary: Development files for Qualcomm MinkIPC
-Requires: %{name}-libs%{?_isa} = %{version}-%{release}
+Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
 This package consists of header files and unversioned linker symlinks for development
@@ -39,7 +32,7 @@ of MinkIPC
 
 %package qteesupplicant
 Summary: Support daemons and udev rules for Qualcomm MinkIPC
-Requires: %{name}-libs%{?_isa} = %{version}-%{release}
+Requires: %{name}%{?_isa} = %{version}-%{release}
 Requires(pre): shadow-utils
 Requires(post): systemd
 Requires(preun): systemd
@@ -53,7 +46,7 @@ for qteesupplicant to access QTEE.
 
 %package tools
 Summary: Additional tools for Qualcomm MinkIPC
-Requires: %{name}-libs%{?_isa} = %{version}-%{release}
+Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %description tools
 This package consists of tools such as rpmb_client.
@@ -61,7 +54,7 @@ This package consists of tools such as rpmb_client.
 
 %package tests
 Summary: Test application for Qualcomm MinkIPC
-Requires: %{name}-libs%{?_isa} = %{version}-%{release}
+Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %description tests
 This package provides test binaries for validating MinkIPC functionality,
@@ -95,7 +88,7 @@ rm -f %{buildroot}%{_libdir}/librpmbservice.so
 rm -f %{buildroot}%{_libdir}/libtaautoload.so
 rm -f %{buildroot}%{_libdir}/libtimeservice.so
 
-%files libs
+%files
 %license LICENSE.txt
 %doc README.md
 %{_libdir}/libminkadaptor.so.*
