@@ -34,24 +34,6 @@ sudo rpm -i minkipc-tools-x.aarch64.rpm
 sudo rpm -i minkipc-tests-x.aarch64.rpm
 ```
 
-## CI: build on PR, release on demand
-
-| Workflow | Trigger | Purpose |
-|---|---|---|
-| [`build-on-pr.yml`](.github/workflows/build-on-pr.yml) | Pull request | Build the RPM so reviewers confirm the package still builds. Read-only — never publishes. |
-| [`pkg-release.yml`](.github/workflows/pkg-release.yml) | Manual (`workflow_dispatch`) | Build **and** publish the RPM to Artifactory, behind an approval gate. |
-
-Both delegate to reusable workflows in `qcom-rpm-utils`, which run `rpmbuild`
-inside the prebuilt `rpm-builder` container image. Required repo configuration
-(`CACHE_BASE_URL` variable, `ARTIFACTORY_ACCESS_TOKEN` secret,
-`pkg-release-approval` environment, runner pool access) is documented in full
-in [`docs/workflows.md`](docs/workflows.md), along with the dist-git
-sources/lookaside-cache model and a troubleshooting table.
-
-This repo was created from [`qualcomm-linux/pkg-rpm-template`](https://github.com/qualcomm-linux/pkg-rpm-template);
-see that template's README if you're onboarding a *different* package and
-want the generic step-by-step instructions.
-
 ## Getting in Contact
 
 How to contact maintainers. E.g. GitHub Issues, GitHub Discussions could be indicated for many cases. However a mail list or list of Maintainer e-mails could be shared for other types of discussions. E.g.
