@@ -1,6 +1,6 @@
 Name:		minkipc
 Version:	1.2.9
-Release:	1%{?dist}
+Release:	1.qli%{?dist}
 Summary:	IPC framework for Qualcomm TEE
 
 License:	BSD-3-Clause
@@ -149,5 +149,5 @@ fi
 
 
 %changelog
-* Wed Sep 02 2026 Abhinaba Rakshit <abhinaba.rakshit@oss.qualcomm.com> - 1.2.9-1
-- Initial RPM package with upstream v1.2.9
+* Wed Oct 14 2026 Abhinaba Rakshit <abhinaba.rakshit@oss.qualcomm.com> - 1.2.9-1.qli
+- Initial RPM packaging with upstream v1.2.9
