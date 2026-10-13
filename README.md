@@ -27,7 +27,7 @@ Full onboarding guide, configuration reference, and troubleshooting live on
 ## Installation Instructions
 
 ```
-sudo rpm -i minkipc-libs-x.aarch64.rpm
+sudo rpm -i minkipc-x.aarch64.rpm
 sudo rpm -i minkipc-devel-x.aarch64.rpm
 sudo rpm -i minkipc-qteesupplicant-x.aarch64.rpm
 sudo rpm -i minkipc-tools-x.aarch64.rpm
