@@ -7,6 +7,7 @@ License:	BSD-3-Clause
 URL:		https://github.com/qualcomm/minkipc
 Source0:	https://github.com/qualcomm/minkipc/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Patch0:		minkipc-idlc-aarch64.patch
+Patch1:		set-library-version.patch
 
 BuildRequires:	gcc
 BuildRequires:	make
@@ -64,7 +65,7 @@ for GlobalPlatform TEE API conformance testing.
 
 %prep
 %setup
-%patch -P0 -p1
+%patch -P0 -P1 -p1
 
 
 %build

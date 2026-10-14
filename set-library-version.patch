@@ -1,0 +1,14 @@
+libminkadaptor: Set library version to 1.0.0
+
+Backported from upstream PR: https://github.com/qualcomm/minkipc/pull/95
+
+diff -ruN minkipc-1.2.9.orig/libminkadaptor/CMakeLists.txt minkipc-1.2.9.new/libminkadaptor/CMakeLists.txt
+--- minkipc-1.2.9.orig/libminkadaptor/CMakeLists.txt	2026-09-09 17:08:36.563836101 +0530
++++ minkipc-1.2.9.new/libminkadaptor/CMakeLists.txt	2026-09-09 17:08:36.611835463 +0530
+@@ -1,5 +1,5 @@
+ project(libminkadaptor
+-	VERSION 0.1.0
++	VERSION 1.0.0
+ 	LANGUAGES C ASM
+ )
+ 
