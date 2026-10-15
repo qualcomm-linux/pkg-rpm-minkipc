@@ -8,6 +8,7 @@ URL:		https://github.com/qualcomm/minkipc
 Source0:	https://github.com/qualcomm/minkipc/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Patch0:		minkipc-idlc-aarch64.patch
 Patch1:		set-library-version.patch
+Patch2:		install-minkipc-headers.patch
 
 BuildRequires:	gcc
 BuildRequires:	make
@@ -65,7 +66,7 @@ for GlobalPlatform TEE API conformance testing.
 
 %prep
 %setup
-%patch -P0 -P1 -p1
+%patch -P0 -P1 -P2 -p1
 
 
 %build
@@ -98,7 +99,7 @@ rm -f %{buildroot}%{_libdir}/libtimeservice.so
 %files devel
 %{_libdir}/libminkadaptor.so
 %{_libdir}/libminkteec.so
-%{_includedir}/*.h
+%{_includedir}/minkipc/*.h
 %{_libdir}/pkgconfig/*.pc
 
 %files qteesupplicant
