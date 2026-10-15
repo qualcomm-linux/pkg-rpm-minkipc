@@ -6,7 +6,7 @@ Summary:	IPC framework for Qualcomm TEE
 License:	BSD-3-Clause
 URL:		https://github.com/qualcomm/minkipc
 Source0:	https://github.com/qualcomm/minkipc/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
-Patch0:		minkipc-idlc-aarch64.patch
+Patch0:		arch-based-mink-idl-compiler.patch
 Patch1:		set-library-version.patch
 Patch2:		install-minkipc-headers.patch
 
