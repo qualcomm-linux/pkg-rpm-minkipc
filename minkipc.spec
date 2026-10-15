@@ -9,6 +9,7 @@ Source0:	https://github.com/qualcomm/minkipc/archive/refs/tags/v%{version}.tar.g
 Patch0:		arch-based-mink-idl-compiler.patch
 Patch1:		set-library-version.patch
 Patch2:		install-minkipc-headers.patch
+Patch3:		define-object-op-version.patch
 
 BuildRequires:	gcc
 BuildRequires:	make
@@ -66,7 +67,7 @@ for GlobalPlatform TEE API conformance testing.
 
 %prep
 %setup
-%patch -P0 -P1 -P2 -p1
+%patch -P0 -P1 -P2 -P3 -p1
 
 
 %build
