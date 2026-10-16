@@ -1,0 +1,71 @@
+Install headers under include/minkipc
+
+Backported from upstream PR: https://github.com/qualcomm/minkipc/pull/97
+
+diff -ruN minkipc-1.2.9.orig/libminkadaptor/CMakeLists.txt minkipc-1.2.9.new/libminkadaptor/CMakeLists.txt
+--- minkipc-1.2.9.orig/libminkadaptor/CMakeLists.txt	2026-09-09 17:08:36.563836101 +0530
++++ minkipc-1.2.9.new/libminkadaptor/CMakeLists.txt	2026-09-09 17:08:36.611835463 +0530
+@@ -92,8 +92,8 @@ install(TARGETS minkadaptor
+ 	ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+ )
+ 
+-install(DIRECTORY include
+-	DESTINATION ${CMAKE_INSTALL_PREFIX}
++install(DIRECTORY include/
++	DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/minkipc"
+ )
+ 
+ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/minkadaptor.pc"
+
+diff -ruN minkipc-1.2.9.orig/libminkadaptor/minkadaptor.pc.in minkipc-1.2.9.new/libminkadaptor/minkadaptor.pc.in
+--- minkipc-1.2.9.orig/libminkadaptor/minkadaptor.pc.in	2026-09-09 17:08:36.563836101 +0530
++++ minkipc-1.2.9.new/libminkadaptor/minkadaptor.pc.in	2026-09-09 17:08:36.611835463 +0530
+@@ -1,7 +1,7 @@
+ prefix="@CMAKE_INSTALL_PREFIX@"
+ exec_prefix="${prefix}"
+ libdir="${prefix}/lib"
+-includedir="${prefix}/include"
++includedir="${prefix}/@CMAKE_INSTALL_INCLUDEDIR@"
+ 
+ Name: @PROJECT_NAME@
+ Description: @CMAKE_PROJECT_DESCRIPTION@
+@@ -9,5 +9,5 @@ URL: @CMAKE_PROJECT_HOMEPAGE_URL@
+ Version: @PROJECT_VERSION@
+ Requires: @pc_req_public@
+ Requires.private: @pc_req_private@
+-Cflags: -I"${includedir}"
++Cflags: -I"${includedir}/minkipc"
+ Libs: -L"${libdir}" -l@libminkadaptortgt@
+diff -ruN minkipc-1.2.9.orig/libminkteec/CMakeLists.txt minkipc-1.2.9.new/libminkteec/CMakeLists.txt
+--- minkipc-1.2.9.orig/libminkteec/CMakeLists.txt	2026-09-09 17:08:36.563836101 +0530
++++ minkipc-1.2.9.new/libminkteec/CMakeLists.txt	2026-09-09 17:08:36.611835463 +0530
+@@ -100,8 +100,8 @@ install(TARGETS minkteec
+ 	ARCHIVE DESTINATION "${CMAKE_INSTALL_LIBDIR}"
+ )
+ 
+-install(DIRECTORY include
+-	DESTINATION ${CMAKE_INSTALL_PREFIX}
++install(DIRECTORY include/
++	DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/minkipc"
+ )
+ 
+ install(FILES "${CMAKE_CURRENT_BINARY_DIR}/minkteec.pc"
+diff -ruN minkipc-1.2.9.orig/libminkteec/minkteec.pc.in minkipc-1.2.9.new/libminkteec/minkteec.pc.in
+--- minkipc-1.2.9.orig/libminkteec/minkteec.pc.in	2026-09-09 17:08:36.563836101 +0530
++++ minkipc-1.2.9.new/libminkteec/minkteec.pc.in	2026-09-09 17:08:36.611835463 +0530
+@@ -1,7 +1,7 @@
+ prefix="@CMAKE_INSTALL_PREFIX@"
+ exec_prefix="${prefix}"
+ libdir="${prefix}/lib"
+-includedir="${prefix}/include"
++includedir="${prefix}/@CMAKE_INSTALL_INCLUDEDIR@"
+ 
+ Name: @PROJECT_NAME@
+ Description: @CMAKE_PROJECT_DESCRIPTION@
+@@ -9,5 +9,5 @@ URL: @CMAKE_PROJECT_HOMEPAGE_URL@
+ Version: @PROJECT_VERSION@
+ Requires: @pc_req_public@
+ Requires.private: @pc_req_private@
+-Cflags: -I"${includedir}"
++Cflags: -I"${includedir}/minkipc"
+ Libs: -L"${libdir}" -l@libminkteectgt@

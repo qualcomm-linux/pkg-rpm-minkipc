@@ -1,17 +1,20 @@
 Name:		minkipc
 Version:	1.2.9
-Release:	1%{?dist}
+Release:	1.qli%{?dist}
 Summary:	IPC framework for Qualcomm TEE
 
 License:	BSD-3-Clause
 URL:		https://github.com/qualcomm/minkipc
 Source0:	https://github.com/qualcomm/minkipc/archive/refs/tags/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
-Patch0:		minkipc-idlc-aarch64.patch
+Patch0:		arch-based-mink-idl-compiler.patch
+Patch1:		set-library-version.patch
+Patch2:		install-minkipc-headers.patch
+Patch3:		define-object-op-version.patch
 
 BuildRequires:	gcc
 BuildRequires:	make
-BuildRequires:	qcbor-devel
-BuildRequires:	quic-teec-devel
+BuildRequires:	pkgconfig(qcbor)
+BuildRequires:	pkgconfig(qcomtee)
 BuildRequires:	systemd-rpm-macros
 
 %description
@@ -21,16 +24,9 @@ user space to Trusted Execution Environment—using unforgeable object reference
 mechanisms such as SMC, sockets, or TEE IOCTLs.
 
 
-%package libs
-Summary: Shared library for Qualcomm MinkIPC
-
-%description libs
-This package consists of the shared library libminkadaptor and libminkteec.
-
-
 %package devel
 Summary: Development files for Qualcomm MinkIPC
-Requires: %{name}-libs%{?_isa} = %{version}-%{release}
+Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %description devel
 This package consists of header files and unversioned linker symlinks for development
@@ -39,7 +35,7 @@ of MinkIPC
 
 %package qteesupplicant
 Summary: Support daemons and udev rules for Qualcomm MinkIPC
-Requires: %{name}-libs%{?_isa} = %{version}-%{release}
+Requires: %{name}%{?_isa} = %{version}-%{release}
 Requires(pre): shadow-utils
 Requires(post): systemd
 Requires(preun): systemd
@@ -53,7 +49,7 @@ for qteesupplicant to access QTEE.
 
 %package tools
 Summary: Additional tools for Qualcomm MinkIPC
-Requires: %{name}-libs%{?_isa} = %{version}-%{release}
+Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %description tools
 This package consists of tools such as rpmb_client.
@@ -61,7 +57,7 @@ This package consists of tools such as rpmb_client.
 
 %package tests
 Summary: Test application for Qualcomm MinkIPC
-Requires: %{name}-libs%{?_isa} = %{version}-%{release}
+Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %description tests
 This package provides test binaries for validating MinkIPC functionality,
@@ -71,13 +67,13 @@ for GlobalPlatform TEE API conformance testing.
 
 %prep
 %setup
-%patch -P0 -p1
+%patch -P0 -P1 -P2 -P3 -p1
 
 
 %build
 %cmake \
-  -DSYSTEMD_UNIT_DIR=/usr/lib/systemd/system \
-  -DUDEV_DIR=/usr/lib/udev/rules.d \
+  -DSYSTEMD_UNIT_DIR=%{_unitdir} \
+  -DUDEV_DIR=%{_udevrulesdir} \
   -DBUILD_UNITTEST=TRUE \
   -DDISTRO_USER=securemsm \
   -DDISTRO_GROUP=securemsm \
@@ -95,7 +91,7 @@ rm -f %{buildroot}%{_libdir}/librpmbservice.so
 rm -f %{buildroot}%{_libdir}/libtaautoload.so
 rm -f %{buildroot}%{_libdir}/libtimeservice.so
 
-%files libs
+%files
 %license LICENSE.txt
 %doc README.md
 %{_libdir}/libminkadaptor.so.*
@@ -104,7 +100,7 @@ rm -f %{buildroot}%{_libdir}/libtimeservice.so
 %files devel
 %{_libdir}/libminkadaptor.so
 %{_libdir}/libminkteec.so
-%{_includedir}/*.h
+%{_includedir}/minkipc/*.h
 %{_libdir}/pkgconfig/*.pc
 
 %files qteesupplicant
@@ -149,5 +145,5 @@ fi
 
 
 %changelog
-* Wed Sep 02 2026 Abhinaba Rakshit <abhinaba.rakshit@oss.qualcomm.com> - 1.2.9-1
-- Initial RPM package with upstream v1.2.9
+* Wed Oct 14 2026 Abhinaba Rakshit <abhinaba.rakshit@oss.qualcomm.com> - 1.2.9-1.qli
+- Initial RPM packaging with upstream v1.2.9
